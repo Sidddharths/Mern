@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Game</title>
+    <link rel="icon" type="image/x-icon" href="https://emojiisland.com/cdn/shop/products/Heart_Eyes_Emoji_2_large.png?v=1571606090">
+    <style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Ubuntu', sans-serif;
+}
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 95vh; 
+    background-color: #f8f9fa;
+    margin: 0;
+    background-image: url("https://i.pinimg.com/736x/a5/ee/8c/a5ee8cf40d195fe314d9acfca4d53ddf.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+
+.container {
+    text-align: center;
+    padding: 50px;
+
+}
+.g1{
+    display:flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    padding: 50px;
+    border-radius: 12px;
+    box-shadow: 0 0 10px #000000;
+}
+.g2{
+    background-color: #ffffff;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 390px;
+    border-radius: 12px;
+    box-shadow: 0 0 10px #000000;
+    
+}
+#score {
+    font-weight: 600;
+    font-size: 1.7em;
+   
+}
+.reset {
+    
+    border: none;
+    padding: 10px 10px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    border-radius: 10px;
+    background-color: #000000;
+    color: #ffffff;
+
+    
+}
+.reset:hover{
+    background-color: red;
+    color: #fff;
+}
+
+h1 {
+    margin-bottom: 40px;
+    font-size: 3em;
+    letter-spacing: 0.01em;
+}
+
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(5, 100px);
+    gap: 16px;
+    justify-content: center;
+    display: flexbox;
+}
+
+.card {
+    width: 100px;
+    height: 100px;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 48px;
+    cursor: pointer;
+    border-radius: 10px;
+    pointer-events: auto;
+    text-decoration: none;
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+    border-style: solid;
+    border-color:#ffd900;
+
+}
+
+
+
+.card.flipped {
+    transform: rotateY(180deg);
+}
+
+.card::before{
+    content: "";
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    backface-visibility: hidden;
+    border-radius: 10px;
+    background-color: #FDDA0D;
+    color: #fff;
+    border-style: solid;
+    border-color:black;
+    
+}
+
+
+.card:hover::before {
+    box-shadow: 0 0 10px #303030;
+}
+
+</style>
+</head>
+
+<!--------------------------------------------------------------------------------------------------------------------->
+<body>
+    
+    <div class="container">
+    <div class="g1">
+        <div class="game-board" id="game-board"></div>
+        </div>
+        <br>
+        <div class ="g2">
+            <div id="score">Score: </div>
+        <button class="reset" id="reset" onclick="window.location.reload();">RESET</button>
+        
+        </div>
+    </div>
+<!--------------------------------------------------------------------------------------------------------------------->
+<script src="https://cdn.jsdelivr.net/npm/@tsparticles/confetti@3.0.3/tsparticles.confetti.bundle.min.js"></script>
+<script >
+const cardsArray = [
+    '😎','😎','😂','😂','😘','😘','😭','😭','😡','😡','🥶','🥶','🤑','🤑','💩','💩','😴','😴','🤯','🤯'
+];
+
+let firstCard = null;
+let secondCard = null;
+let lockBoard = false;
+let score = 0;
+
+function shuffle(array) {
+    let currentIndex = array.length, randomIndex;
+
+    while (currentIndex !== 0) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+        [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+    }
+
+    return array;
+}
+
+function createCard(content) {
+    const card = document.createElement('div');
+    card.classList.add('card');
+    card.dataset.value = content;
+    const cardInner = document.createElement('div');
+    cardInner.classList.add('card-inner');
+    cardInner.textContent = content;
+    card.appendChild(cardInner);
+    card.addEventListener('click', flipCard);
+    return card;
+}
+
+function initGame() {
+    const gameBoard = document.getElementById('game-board');
+    shuffle(cardsArray);
+    cardsArray.forEach(content => {
+        const card = createCard(content);
+        gameBoard.appendChild(card);
+    });
+}
+
+function flipCard() {
+    if (lockBoard || this === firstCard){
+        return;
+         
+    } 
+    this.classList.add('flipped');
+
+    if (!firstCard) {
+        firstCard = this;
+        return;
+        
+    }
+
+    secondCard = this;
+    checkForMatch();
+}
+
+function checkForMatch() {
+    let isMatch = firstCard.dataset.value === secondCard.dataset.value;
+    
+    if(isMatch){
+        disableCards()
+        score= score +1;
+        document.getElementById("score").innerHTML = "Score: "+score;
+    }
+    else{
+        unflipCards();
+    }
+    if(score==10){
+        
+        document.getElementById("reset").style.backgroundColor = "red";
+        const end = Date.now() + 15 * 1000;
+
+const colors = ["#bb0000", "#ffffff"];
+
+(function frame() {
+  confetti({
+    particleCount: 3,
+    angle: 60,
+    spread: 65,
+    origin: { x: 0 },
+    colors: colors,
+  });
+
+  confetti({
+    particleCount: 3,
+    angle: 120,
+    spread: 65,
+    origin: { x: 1 },
+    colors: colors,
+  });
+
+  if (Date.now() < end) {
+    requestAnimationFrame(frame);
+  }
+})();
+}
+}
+document.getElementById("score").innerHTML = "Score: "+score;
+
+
+
+function disableCards() {
+    firstCard.removeEventListener('click', flipCard);
+    secondCard.removeEventListener('click', flipCard);
+    resetBoard();
+}
+
+function unflipCards() {
+    lockBoard = true;
+    setTimeout(() => {
+        firstCard.classList.remove('flipped');
+        secondCard.classList.remove('flipped');
+        resetBoard();
+    }, 750);
+}
+
+
+function resetBoard() {
+    [firstCard, secondCard, lockBoard] = [null, null, false];
+}
+
+document.addEventListener('DOMContentLoaded', initGame);
+</script>
+</body>
+</html>

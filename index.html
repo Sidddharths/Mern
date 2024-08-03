@@ -20,23 +20,24 @@ body {
     background-color: #f8f9fa;
     margin: 0;
     background-image: url("https://i.pinimg.com/736x/a5/ee/8c/a5ee8cf40d195fe314d9acfca4d53ddf.jpg");
-    background-repeat: no-repeat;
+    /* background-repeat: no-repeat; */
     background-size: cover;
 
 }
 
 .container {
     text-align: center;
-    padding: 50px;
+    /* padding: 50px; */
+    /* margin-left: 300px; */
 
 }
 .g1{
     display:flex;
     flex-direction: column;
-    background-color: #ffffff;
-    padding: 50px;
+    /* background-color: #ffffff; */
+    /* padding: 50px; */
     border-radius: 12px;
-    box-shadow: 0 0 10px #000000;
+    /* box-shadow: 0 0 10px #000000; */
 }
 .g2{
     background-color: #ffffff;
@@ -44,14 +45,14 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 390px;
+    gap: 90px;
     border-radius: 12px;
-    box-shadow: 0 0 10px #000000;
+    /* box-shadow: 0 0 10px #000000; */
     
 }
 #score {
     font-weight: 600;
-    font-size: 1.7em;
+    font-size: 1em;
    
 }
 .reset {
@@ -81,20 +82,21 @@ h1 {
 
 .game-board {
     display: grid;
-    grid-template-columns: repeat(5, 100px);
-    gap: 16px;
-    justify-content: center;
+    grid-template-columns: repeat(5, 50px);
+    
+    gap: 8px;
+    /* justify-content: center; */
     display: flexbox;
 }
 
 .card {
-    width: 100px;
-    height: 100px;
+    width: 50px;
+    height: 50px;
     background-color: #ffffff;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 48px;
+    font-size: 45px;
     cursor: pointer;
     border-radius: 10px;
     pointer-events: auto;
@@ -115,8 +117,8 @@ h1 {
 .card::before{
     content: "";
     position: absolute;
-    width: 100px;
-    height: 100px;
+    width: 50px;
+    height: 50px;
     backface-visibility: hidden;
     border-radius: 10px;
     background-color: #FDDA0D;

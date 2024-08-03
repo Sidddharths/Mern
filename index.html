@@ -34,10 +34,10 @@ body {
 .g1{
     display:flex;
     flex-direction: column;
-    /* background-color: #ffffff; */
-    /* padding: 50px; */
+    background-color: #ffffff;
+    padding: 25px;
     border-radius: 12px;
-    /* box-shadow: 0 0 10px #000000; */
+    box-shadow: 0 0 10px #000000;
 }
 .g2{
     background-color: #ffffff;
@@ -47,12 +47,12 @@ body {
     align-items: center;
     gap: 90px;
     border-radius: 12px;
-    /* box-shadow: 0 0 10px #000000; */
+    box-shadow: 0 0 10px #000000;
     
 }
 #score {
     font-weight: 600;
-    font-size: 1em;
+    font-size: 1.4em;
    
 }
 .reset {
@@ -82,7 +82,7 @@ h1 {
 
 .game-board {
     display: grid;
-    grid-template-columns: repeat(5, 50px);
+    grid-template-columns: repeat(4, 65px);
     
     gap: 8px;
     /* justify-content: center; */
@@ -90,9 +90,9 @@ h1 {
 }
 
 .card {
-    width: 50px;
-    height: 50px;
-    background-color: #ffffff;
+    width: 65px;
+    height: 65px;
+    background-color: rgba(244,244,244,0);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -103,8 +103,8 @@ h1 {
     text-decoration: none;
     transform-style: preserve-3d;
     transition: transform 0.6s;
-    border-style: solid;
-    border-color:#ffd900;
+    /* border-style: solid;
+    border-color:#ffd900; */
 
 }
 
@@ -117,8 +117,8 @@ h1 {
 .card::before{
     content: "";
     position: absolute;
-    width: 50px;
-    height: 50px;
+    width: 65px;
+    height: 65px;
     backface-visibility: hidden;
     border-radius: 10px;
     background-color: #FDDA0D;

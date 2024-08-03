@@ -16,7 +16,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 95vh; 
+    height: 89vh; 
     background-color: #f8f9fa;
     margin: 0;
     background-image: url("https://i.pinimg.com/736x/a5/ee/8c/a5ee8cf40d195fe314d9acfca4d53ddf.jpg");
@@ -50,6 +50,10 @@ body {
     box-shadow: 0 0 10px #000000;
     
 }
+h1 {
+    font-size: 2.3em;
+    letter-spacing: 0.01em;
+}
 #score {
     font-weight: 600;
     font-size: 1.4em;
@@ -74,13 +78,7 @@ body {
     color: #fff;
 }
 
-h1 {
-    margin-bottom: 10px;
-    font-size: 3em;
-    letter-spacing: 0.01em;
-    color: #fff;
-    text-shadow: 0 0 10px #424242;;
-}
+
 
 .game-board {
     display: grid;
@@ -142,7 +140,10 @@ h1 {
 <body>
     
     <div class="container">
+        <div class="g2">
         <h1>Memory Game</h1>
+        </div>
+        <br>
     <div class="g1">
         <div class="game-board" id="game-board"></div>
         </div>
